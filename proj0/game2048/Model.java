@@ -109,11 +109,55 @@ public class Model extends Observable {
     public boolean tilt(Side side) {
         boolean changed;
         changed = false;
+        //When board.move() returns true, update the score
+        board.setViewingPerspective(side);
 
         // TODO: Modify this.board (and perhaps this.score) to account
+        for (int col = 0; col < board.size(); col += 1) {
+            int modified = board.size();
+            for (int row = board.size() - 2; row >= 0; row -= 1) {
+                Tile t = board.tile(col, row);
+                if (t != null) {
+                    Tile upOne = board.tile(col, row + 1);
+                    if (!(upOne != null && upOne.value() != t.value())){
+                        if (upOne == null){
+                            // 上一行是空的情况
+                            int r = row + 1;
+                            while (r < board.size()) {
+                                if (board.tile(col, r) != null) {
+                                    //合并
+                                    if (board.tile(col, r).value() == t.value() && r < modified) {
+                                        board.move(col, r, t);
+                                        modified = r;
+                                        score += t.value() * 2;
+                                    }else{
+                                        board.move(col, r - 1, t);
+                                    }
+                                    break;
+                                }else if (r + 1 < board.size()) {
+                                    r += 1;
+                                }else {
+                                    board.move(col, board.size() - 1, t);
+                                    break;
+                                }
+                            }
+                        }else {
+                            if (row + 1 < modified) {
+                                // 上一行不空且二者一致的情况，合并
+                                board.move(col, row + 1, t);
+                                modified = row + 1;
+                                score += t.value() * 2;
+                            }
+                        }
+                        changed = true;
+                    }
+                }
+            }
+        }
+
+        board.setViewingPerspective(Side.NORTH);
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
-
         checkGameOver();
         if (changed) {
             setChanged();
