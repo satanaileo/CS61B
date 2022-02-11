@@ -29,7 +29,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addFirst(T item) {
-        if (size() == arr.length) {
+        if (size == arr.length) {
             resize(arr.length * 2);
         }
         if (start == 0) {
@@ -47,7 +47,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addLast(T item) {
-        if (size() == arr.length) {
+        if (size == arr.length) {
             resize(arr.length * 2);
         }
         arr[end] = item;
@@ -84,6 +84,9 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         T temp = arr[start];
         arr[start] = null;
         if (start == arr.length - 1) {
@@ -97,6 +100,9 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         T temp;
         if (end == 0) {
             temp = arr[arr.length - 1];
