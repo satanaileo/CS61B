@@ -32,15 +32,7 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == arr.length) {
             resize(arr.length * 2);
         }
-        if (start == 0) {
-            if (size != 0) {
-                start = arr.length - 1;
-            } else {
-                end = 1;
-            }
-        } else {
-            start -= 1;
-        }
+        start = ((start - 1) + arr.length) % arr.length;
         arr[start] = item;
         size += 1;
     }
@@ -51,11 +43,7 @@ public class ArrayDeque<T> implements Deque<T> {
             resize(arr.length * 2);
         }
         arr[end] = item;
-        if (end != arr.length - 1) {
-            end += 1;
-        } else {
-            end = 0;
-        }
+        end = (end + 1) % arr.length;
         size += 1;
     }
 
@@ -89,11 +77,7 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         T temp = arr[start];
         arr[start] = null;
-        if (start == arr.length - 1) {
-            start = 0;
-        } else {
-            start += 1;
-        }
+        start = (start + 1) % arr.length;
         size -= 1;
         return temp;
     }
@@ -103,16 +87,9 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == 0) {
             return null;
         }
-        T temp;
-        if (end == 0) {
-            temp = arr[arr.length - 1];
-            arr[arr.length - 1] = null;
-            end = arr.length - 1;
-        } else {
-            temp = arr[end - 1];
-            arr[end - 1] = null;
-            end -= 1;
-        }
+        end = (end - 1 + arr.length) % arr.length;
+        T temp = arr[end];
+        arr[end] = null;
         size -= 1;
         return temp;
     }

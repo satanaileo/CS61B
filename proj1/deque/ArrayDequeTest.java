@@ -47,4 +47,16 @@ public class ArrayDequeTest {
         assertEquals(6, (long) test.get(test.size() - 1));
         assertEquals(7, test.size());
     }
+
+    @Test
+    public void testAddRemove() {
+        Deque<Integer> test = new ArrayDeque<>();
+        for (int i = 0; i < 8; i += 1) {
+            test.addFirst(i);
+        }
+        for (int i = 0; i < 8; i += 1) {
+            test.removeLast();
+        }
+        assertEquals(test.size(), 0);
+    }
 }
