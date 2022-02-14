@@ -75,6 +75,9 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == 0) {
             return null;
         }
+        if (arr.length >= 16 && size == arr.length / 4) {
+            resize(arr.length / 2);
+        }
         T temp = arr[start];
         arr[start] = null;
         start = (start + 1) % arr.length;
@@ -86,6 +89,9 @@ public class ArrayDeque<T> implements Deque<T> {
     public T removeLast() {
         if (size == 0) {
             return null;
+        }
+        if (arr.length >= 16 && size == arr.length / 4) {
+            resize(arr.length / 2);
         }
         end = (end - 1 + arr.length) % arr.length;
         T temp = arr[end];
@@ -99,11 +105,16 @@ public class ArrayDeque<T> implements Deque<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-        int tmp = start + index - arr.length;
-        if (tmp < 0) {
-            return arr[start + index];
-        } else {
-            return arr[tmp];
-        }
+        return arr[(start + index) % arr.length];
+    }
+
+    /***
+    * @Author satanaileo
+    * @Description Returns the length of the using array.
+    * @Date 2022/2/12
+    * @return arr.length.
+    */
+    public int arrLength() {
+        return arr.length;
     }
 }

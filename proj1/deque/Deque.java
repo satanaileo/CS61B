@@ -4,12 +4,12 @@ public interface Deque<T> {
     /**
     * Adds an item of type T to the front of the deque. You can assume that item is never null.
     */
-    public void addFirst(T item);
+    void addFirst(T item);
 
     /**
     * Adds an item of type T to the back of the deque. You can assume that item is never null.
     */
-    public void addLast(T item);
+    void addLast(T item);
 
     /***
     * @Author satanaileo
@@ -17,7 +17,7 @@ public interface Deque<T> {
     * @Date 2022/2/11
     * @return boolean
     */
-    default public boolean isEmpty() {
+    default boolean isEmpty() {
         return size() == 0;
     }
 
@@ -27,7 +27,7 @@ public interface Deque<T> {
     * @Date 2022/2/11
     * @return int
     */
-    public int size();
+    int size();
 
     /***
     * @Author satanaileo
@@ -35,7 +35,7 @@ public interface Deque<T> {
      * separated by a space. Once all the items have been printed, print out a new line.
     * @Date 2022/2/11
     */
-    public void printDeque();
+    void printDeque();
 
     /***
     * @Author satanaileo
@@ -43,7 +43,7 @@ public interface Deque<T> {
     * @Date 2022/2/11
     * @return T
     */
-    public T removeFirst();
+    T removeFirst();
 
     /***
     * @Author satanaileo
@@ -51,7 +51,7 @@ public interface Deque<T> {
     * @Date 2022/2/11
     * @return T
     */
-    public T removeLast();
+    T removeLast();
 
     /***
     * @Author satanaileo
@@ -60,5 +60,5 @@ public interface Deque<T> {
     * @Date 2022/2/11
     * @return T
     */
-    public T get(int index);
+    T get(int index);
 }

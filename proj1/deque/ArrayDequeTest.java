@@ -20,10 +20,21 @@ public class ArrayDequeTest {
     @Test
     public void testGet() {
         Deque<Integer> test = new ArrayDeque<>();
-        for (int i = 0; i < 15; i += 1) {
+        for (int i = 0; i < 32; i += 1) {
             test.addLast(i);
         }
-        assertEquals(14, (long) test.get(14));
+        for (int i = 0; i < 32; i += 1) {
+            assertEquals(i, (long) test.get(i));
+        }
+        for (int i = 0; i < 32; i += 1) {
+            test.removeLast();
+        }
+        for (int i = 0; i < 32; i += 1) {
+            test.addFirst(i);
+        }
+        for (int i = 0; i < 32; i += 1) {
+            assertEquals(31 - i, (long) test.get(i));
+        }
     }
 
     @Test
@@ -58,5 +69,27 @@ public class ArrayDequeTest {
             test.removeLast();
         }
         assertEquals(test.size(), 0);
+    }
+
+    @Test
+    public void testResize() {
+        // 此处需要声明为ArrayDeque,因为.arrLength()不在Deque接口中，声明为Deque过不了编译
+        ArrayDeque<Integer> test = new ArrayDeque<>();
+        for (int i = 0; i < 64; i += 1) {
+            test.addFirst(i);
+        }
+        assertEquals(64, test.arrLength());
+        for (int i = 0; i < 64; i += 1) {
+            test.removeLast();
+        }
+        assertEquals(8, test.arrLength());
+        for (int i = 0; i < 64; i += 1) {
+            test.addLast(i);
+        }
+        assertEquals(64, test.arrLength());
+        for (int i = 0; i < 64; i += 1) {
+            test.removeFirst();
+        }
+        assertEquals(8, test.arrLength());
     }
 }
