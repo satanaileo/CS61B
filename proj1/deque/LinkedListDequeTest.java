@@ -1,6 +1,8 @@
 package deque;
 
 import org.junit.Test;
+
+
 import static org.junit.Assert.*;
 
 
@@ -130,5 +132,46 @@ public class LinkedListDequeTest {
         }
 
 
+    }
+
+    @Test
+    public void testGetRecursive() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        for (int i = 0; i < 10000; i++) {
+            lld1.addLast(i);
+        }
+        for (int i = 0; i < 10000; i += 1) {
+            assertEquals(lld1.get(i), lld1.getRecursive(i));
+        }
+    }
+
+    @Test
+    public void testIterator() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        for (int i = 0; i < 10; i++) {
+            lld1.addLast(i);
+        }
+        int i = 0;
+        for (int item : lld1) {
+            assertEquals(item, (long) lld1.get(i));
+            i += 1;
+        }
+    }
+
+    @Test
+    public void testEquals() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        for (int i = 0; i < 10; i++) {
+            lld1.addLast(i);
+        }
+        LinkedListDeque<Integer> lld2 = new LinkedListDeque<Integer>();
+        for (int i = 0; i < 10; i++) {
+            lld2.addLast(i);
+        }
+        LinkedListDeque<Integer> lld3 = lld1;
+
+        assertTrue(lld1.equals(lld2));
+        assertTrue(lld2.equals(lld3));
+        assertTrue(lld2.equals(lld1));
     }
 }
