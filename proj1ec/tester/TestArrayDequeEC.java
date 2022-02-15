@@ -17,7 +17,7 @@ public class TestArrayDequeEC {
         StringBuilder sb = new StringBuilder("\n");
         StudentArrayDeque<Integer> st = new StudentArrayDeque<>();
         ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
-        for (int i = 0; i < 100; i += 1) {
+        for (int i = 0; i < 10000; i += 1) {
             double randNum = StdRandom.uniform();
             if (randNum < 0.25) {
                 st.addFirst(i);
