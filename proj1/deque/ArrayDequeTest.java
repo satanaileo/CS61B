@@ -1,6 +1,9 @@
 package deque;
 
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 public class ArrayDequeTest {
@@ -77,10 +80,14 @@ public class ArrayDequeTest {
         lld1.addFirst("abc");
         lld1.addFirst("b");
         lld1.addFirst("c");
-        int i = 0;
-        for (String item : lld1) {
-            assertEquals(item, lld1.get(i));
-            i += 1;
+        lld1.removeFirst();
+        lld1.addFirst("hah");
+        lld1.removeLast();
+        Iterator<String> it = lld1.iterator();
+        for (int i = 0; i < 8; i += 1) {
+            if (it.hasNext()) {
+                System.out.println(it.next());
+            }
         }
     }
 }

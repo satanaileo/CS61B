@@ -117,16 +117,18 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     private class ArrayIterator implements Iterator<T> {
-        private int iter = start;
+        private int iter = 0;
 
         @Override
         public boolean hasNext() {
-            return arr[iter % arr.length] != null;
+            return iter < size;
         }
 
         @Override
         public T next() {
-            return arr[iter++];
+            T returnItem = arr[(start + iter) % arr.length];
+            iter += 1;
+            return returnItem;
         }
     }
 
