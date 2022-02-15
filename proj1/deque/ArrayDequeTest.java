@@ -70,4 +70,17 @@ public class ArrayDequeTest {
         }
         assertEquals(test.size(), 0);
     }
+
+    @Test
+    public void testIterator() {
+        ArrayDeque<String> lld1 = new ArrayDeque<>();
+        lld1.addFirst("abc");
+        lld1.addFirst("b");
+        lld1.addFirst("c");
+        int i = 0;
+        for (String item : lld1) {
+            assertEquals(item, lld1.get(i));
+            i += 1;
+        }
+    }
 }
