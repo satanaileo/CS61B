@@ -25,7 +25,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             System.arraycopy(arr, 0, newArr, arr.length - start, end);
         }
         start = 0;
-        end = arr.length;
+        end = size();
         arr = newArr;
     }
 
@@ -110,15 +110,6 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return arr[(start + index) % arr.length];
     }
 
-    /***
-    * @Author satanaileo
-    * @Description Returns the length of the using array.
-    * @Date 2022/2/12
-    * @return arr.length.
-    */
-    public int arrLength() {
-        return arr.length;
-    }
 
     @Override
     public Iterator<T> iterator() {
@@ -126,11 +117,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     private class ArrayIterator implements Iterator<T> {
-        private int iter;
-
-        public ArrayIterator() {
-            iter = 0;
-        }
+        private int iter = 0;
 
         @Override
         public boolean hasNext() {
@@ -139,7 +126,10 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
         @Override
         public T next() {
-            return arr[iter++];
+            if (hasNext()) {
+                return arr[iter++];
+            }
+            return null;
         }
     }
 
@@ -148,15 +138,15 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ArrayDeque)) {
+        if (!(o instanceof Deque)) {
             return false;
         }
-        ArrayDeque<T> cmp = (ArrayDeque) o;
+        Deque<T> cmp = (Deque) o;
         if (cmp.size() != size()) {
             return false;
         }
         for (int i = 0; i < size(); i += 1) {
-            if (cmp.get(i) != this.get(i)) {
+            if (cmp.get(i).equals(this.get(i))) {
                 return false;
             }
         }

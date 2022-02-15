@@ -170,8 +170,14 @@ public class LinkedListDequeTest {
         }
         LinkedListDeque<Integer> lld3 = lld1;
 
+        ArrayDeque<Integer> lld4 = new ArrayDeque<>();
+        for (int i = 0; i < 10; i++) {
+            lld4.addLast(i);
+        }
+
         assertTrue(lld1.equals(lld2));
         assertTrue(lld2.equals(lld3));
         assertTrue(lld2.equals(lld1));
+        assertTrue(lld1.equals(lld4));
     }
 }

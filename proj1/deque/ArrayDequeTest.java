@@ -70,26 +70,4 @@ public class ArrayDequeTest {
         }
         assertEquals(test.size(), 0);
     }
-
-    @Test
-    public void testResize() {
-        // 此处需要声明为ArrayDeque,因为.arrLength()不在Deque接口中，声明为Deque过不了编译
-        ArrayDeque<Integer> test = new ArrayDeque<>();
-        for (int i = 0; i < 64; i += 1) {
-            test.addFirst(i);
-        }
-        assertEquals(64, test.arrLength());
-        for (int i = 0; i < 64; i += 1) {
-            test.removeLast();
-        }
-        assertEquals(8, test.arrLength());
-        for (int i = 0; i < 64; i += 1) {
-            test.addLast(i);
-        }
-        assertEquals(64, test.arrLength());
-        for (int i = 0; i < 64; i += 1) {
-            test.removeFirst();
-        }
-        assertEquals(8, test.arrLength());
-    }
 }

@@ -21,9 +21,12 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
         @Override
         public T next() {
-            T returnItem = iter.next.item;
-            iter = iter.next;
-            return returnItem;
+            if (hasNext()) {
+                T returnItem = iter.next.item;
+                iter = iter.next;
+                return returnItem;
+            }
+            return null;
         }
     }
 
@@ -122,15 +125,15 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof LinkedListDeque)) {
+        if (!(o instanceof Deque)) {
             return false;
         }
-        LinkedListDeque<T> cmp = (LinkedListDeque) o;
+        Deque<T> cmp = (Deque) o;
         if (cmp.size() != size()) {
             return false;
         }
         for (int i = 0; i < size(); i += 1) {
-            if (cmp.get(i) != this.get(i)) {
+            if (cmp.get(i).equals(this.get(i))) {
                 return false;
             }
         }

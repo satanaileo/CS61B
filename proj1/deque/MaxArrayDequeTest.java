@@ -52,4 +52,29 @@ public class MaxArrayDequeTest {
         assertEquals("Alice", maxArray.max());
         assertEquals("Cu", maxArray.max(new HeadComparator()));
     }
+
+    @Test
+    public void testFromAuto() {
+        MaxArrayDeque<Integer> maxArrayDeque = new MaxArrayDeque<>(new IntComparator());
+        maxArrayDeque.addFirst(0);
+        maxArrayDeque.addLast(1);
+        maxArrayDeque.removeLast();
+        maxArrayDeque.addLast(3);
+        maxArrayDeque.addFirst(4);
+        maxArrayDeque.addFirst(5);
+        maxArrayDeque.addLast(6);
+        maxArrayDeque.addFirst(7);
+        maxArrayDeque.addFirst(8);
+        maxArrayDeque.addFirst(9);
+        maxArrayDeque.addFirst(10);
+        maxArrayDeque.removeLast();
+        maxArrayDeque.removeFirst();
+        maxArrayDeque.removeLast();
+        maxArrayDeque.removeLast();
+        maxArrayDeque.removeFirst();
+        maxArrayDeque.addLast(16);
+        maxArrayDeque.removeFirst();
+        maxArrayDeque.removeFirst();
+        maxArrayDeque.removeLast();
+    }
 }
