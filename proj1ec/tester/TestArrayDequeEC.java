@@ -42,7 +42,7 @@ public class TestArrayDequeEC {
                     assertEquals(sb.toString(), expected, actual);
                 }
             } else {
-                sb.append("removeFirst()\n");
+                sb.append("removeLast()\n");
                 assertEquals(sb.toString(), solution.size(), st.size());
                 if (solution.size() > 0) {
                     Integer actual = st.removeLast();
