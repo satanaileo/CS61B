@@ -23,27 +23,29 @@ public class TestArrayDequeEC {
                 st.addFirst(i);
                 solution.addFirst(i);
                 sb.append("addFirst(" + i + ")\n");
-                Integer expected = solution.get(0);
-                Integer actual = st.get(0);
-                assertEquals(sb.toString(), expected, actual);
+//                Integer expected = solution.get(0);
+//                Integer actual = st.get(0);
+//                assertEquals(sb.toString(), expected, actual);
             } else if (randNum < 0.5) {
                 st.addLast(i);
                 solution.addLast(i);
                 sb.append("addLast(" + i + ")\n");
-                Integer expected = solution.get(solution.size() - 1);
-                Integer actual = st.get(st.size() - 1);
-                assertEquals(sb.toString(), expected, actual);
+//                Integer expected = solution.get(solution.size() - 1);
+//                Integer actual = st.get(st.size() - 1);
+//                assertEquals(sb.toString(), expected, actual);
             } else if (randNum < 0.75) {
-                sb.append("removeFirst()\n");
+                sb.append("size()\n");
                 assertEquals(sb.toString(), solution.size(), st.size());
+                sb.append("removeFirst()\n");
                 if (solution.size() > 0) {
                     Integer actual = st.removeFirst();
                     Integer expected = solution.removeFirst();
                     assertEquals(sb.toString(), expected, actual);
                 }
             } else {
-                sb.append("removeLast()\n");
+                sb.append("size()\n");
                 assertEquals(sb.toString(), solution.size(), st.size());
+                sb.append("removeLast()\n");
                 if (solution.size() > 0) {
                     Integer actual = st.removeLast();
                     Integer expected = solution.removeLast();
