@@ -1,5 +1,8 @@
 package bstmap;
 
+import edu.princeton.cs.algs4.BST;
+
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -113,17 +116,74 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
 
     @Override
     public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+        return keySet(root);
+    }
+
+    private Set<K> keySet(BSTNode x) {
+        if (x == null) {
+            return null;
+        }
+        Set<K> set = new HashSet<>();
+        set.add(x.key);
+        if (x.left != null) set.addAll(keySet(x.left));
+        if (x.right != null) set.addAll(keySet(x.right));
+        return set;
     }
 
     @Override
     public V remove(K key) {
-        throw new UnsupportedOperationException();
+        if (!containsKey(key)) {
+            return null;
+        }
+        root = remove(root, key);
+        return null;
     }
 
     @Override
     public V remove(K key, V value) {
         throw new UnsupportedOperationException();
+    }
+
+    private BSTNode remove(BSTNode x, K key) {
+        int cmp = x.key.compareTo(key);
+
+        if (cmp < 0) {
+            x.right = remove(x.right, key);
+        } else if (cmp > 0) {
+            x.left = remove(x.left, key);
+        } else {
+            if (x.left == null) {
+                return x.right;
+            }
+            if (x.right == null) {
+                return x.left;
+            }
+            BSTNode t = x;
+            x = min(t.right);
+            x.right = removeMin(t.right);
+            x.left = t.left;
+        }
+        x.size = size(x.right) + size(x.left) + 1;
+        return x;
+    }
+
+    private BSTNode removeMin(BSTNode x) {
+        if (x.left == null) return x.right;
+        x.left = removeMin(x.left);
+        x.size = size(x.left) + size(x.right) + 1;
+        return x;
+    }
+
+    /**
+    * 求key最小的节点
+    * @author satanaileo
+    * 2022/2/21 14:53
+    **/
+    private BSTNode min(BSTNode x) {
+        if (x.left == null) {
+            return x;
+        }
+        return min(x.left);
     }
 
     @Override
